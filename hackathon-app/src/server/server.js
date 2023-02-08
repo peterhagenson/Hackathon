@@ -20,21 +20,49 @@ app.get("/employees", (req, res) => {
 
 
 app.get("/employees/:employeeID", (req, res) => {
-    
-    dao.getEmployeeById(req.params.employeeID, (err, employee) => {
-        if (employee) {
-          console.log("GET single employee: " +  req.params.employeeID );
-          res.send(employee[0]);
-        } else {
-          res.statusCode = 404;
-          res.end();
+    req.body.reports = [1];
+    const arr = req.body.reports;
+    req.body.role = "Manager";
+    if (req.body.role === "Employee") {
+        dao.getEmployeeByIdNoSalary(req.params.employeeID, (err, employee) => {
+            if (employee) {
+              console.log("GET single employee: " +  req.params.employeeID );
+              res.send(employee[0]);
+            } else {
+              res.statusCode = 404;
+              res.end();
+            }
+        });
+    } else if (req.body.role === "Manager") {
+        if (arr.indexOf(parseInt(req.params.employeeID))>=0) {
+            console.log("Manager view salary");
+            dao.getEmployeeByIdWithSalary(req.params.employeeID, (err, employee) => {
+                if (employee) {
+                console.log("GET single employee: " +  req.params.employeeID );
+                res.send(employee[0]);
+                } else {
+                res.statusCode = 404;
+                res.end();
+                }
+            });
         }
-    });
+        
+    } else if (req.body.role === "HR") {
+        dao.getEmployeeByIdWithSalary(req.params.employeeID, (err, employee) => {
+            if (employee) {
+              console.log("GET single employee: " +  req.params.employeeID );
+              res.send(employee[0]);
+            } else {
+              res.statusCode = 404;
+              res.end();
+            }
+        });
+    }
 });
 
 app.get("/employees/hr/:employeeID", (req, res) => {
     
-    dao.getEmployeeByIdHR(req.params.employeeID, (err, employee) => {
+    dao.getEmployeeByIdWithSalary(req.params.employeeID, (err, employee) => {
         if (employee) {
           console.log("GET single employee: " +  req.params.employeeID );
           res.send(employee[0]);

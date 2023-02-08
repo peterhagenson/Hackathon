@@ -28,7 +28,7 @@ module.exports.getAllEmployees = function (callback) {
 
 
 let index = 1;
-module.exports.getEmployeeById = (employeeID, callback) => {
+module.exports.getEmployeeByIdNoSalary = (employeeID, callback) => {
     index = parseInt(employeeID);
     employees.find({employee_id: index}).project({Salary: 0}).toArray((err, result) => {
         if (err) {
@@ -40,7 +40,7 @@ module.exports.getEmployeeById = (employeeID, callback) => {
     });
 }
 
-module.exports.getEmployeeByIdHR = (employeeID, callback) => {
+module.exports.getEmployeeByIdWithSalary = (employeeID, callback) => {
     index = parseInt(employeeID);
     employees.find({employee_id: index}).toArray((err, result) => {
         if (err) {
