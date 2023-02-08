@@ -4,11 +4,32 @@ function Login(){
 
     let [userName, setUserName] = useState('')
     let [password, setPassword] = useState('')
+    let [user, setUser] = useState('')
 
 function handleSubmit(event) {
     event.preventDefault();
     console.log(userName, password)
 }
+
+let fetchBody = {
+    userName: userName,
+    password: password, 
+}
+
+async function getUser(){
+    await fetch('http://localhost:5000/people', {
+         method: 'GET',    
+     withCredentials: true,    
+         crossorigin: true,
+         body: fetchBody
+
+     })
+     .then((response) => response.json())
+     .then((u) => {
+         console.log(u)
+         setUser(u)
+     })
+ }
 
     return ( 
         <>
