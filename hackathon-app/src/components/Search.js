@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react'
+import {useNavigate} from 'react-router-dom'
 
 
 function Search(){
@@ -6,6 +7,8 @@ function Search(){
     let [employees, setEmployees] = useState([])
     let [searchTerm, setSearchTerm] = useState('')
     let [filteredEmployees, setFilteredEmployees] = useState([])
+
+    const navigate = useNavigate();
  
     //probably need to change line 13
     function filterEmployees(arr, query) {
@@ -30,6 +33,7 @@ function Search(){
 
      function handleClick(employee) {
             console.log(employee)
+            navigate(`/employee/${employee.employee_id}`)
      }
     
 
@@ -49,14 +53,14 @@ function Search(){
              </form>
              
              {filteredEmployees.map((employee)=>
-             <p>{employee?.name}</p>)}
+             <p onClick={()=>handleClick(employee)}>{employee?.name}</p>)}
              </>)} else {
      return(
        <>
        <h1>Welcome to the Enterprise Directory!</h1>
              <h3>Who are you looking for?</h3>
              <form >
-               <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}></input>
+               <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} ></input>
              </form>
      {employees.map((employee) =>
        <p onClick={()=>handleClick(employee)}>{employee?.name}</p>)}
