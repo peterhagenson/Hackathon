@@ -20,7 +20,7 @@ app.get("/employees", (req, res) => {
 
 
 app.get("/employees/:employeeID", (req, res) => {
-    
+    console.log('in get employees', req.params)
     dao.getEmployeeById(req.params.employeeID, (err, employee) => {
         if (employee) {
           console.log("GET single employee: " +  req.params.employeeID );
