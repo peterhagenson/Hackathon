@@ -35,13 +35,12 @@ app.get("/employees/login/:user/:pass", (req, res) => {
     //console.log(req.params);
     dao.getEmployeeByUserPass(req.params.user, req.params.pass, (err, employee) => {
         if (employee) {
-          console.log(req.params.user);
-          console.log(req.params.pass);
-          if (employee.length == 0) {
-            console.log("Empty array, invalid login");
-            res.redirect('back');
-          }
-          res.send(employee[0]);
+            if (employee.length == 0) {
+                res.send({});
+            } else {
+                res.send(employee[0]);
+            }
+         
         } else {
           console.log("Didn't work as intended")
           res.statusCode = 404;
