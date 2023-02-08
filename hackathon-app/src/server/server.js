@@ -45,8 +45,17 @@ app.get("/employees/:employeeID", (req, res) => {
                 res.end();
                 }
             });
+        } else {
+            dao.getEmployeeByIdNoSalary(req.params.employeeID, (err, employee) => {
+                if (employee) {
+                  console.log("GET single employee: " +  req.params.employeeID );
+                  res.send(employee[0]);
+                } else {
+                  res.statusCode = 404;
+                  res.end();
+                }
+            });
         }
-        
     } else if (req.body.role === "HR") {
         dao.getEmployeeByIdWithSalary(req.params.employeeID, (err, employee) => {
             if (employee) {
