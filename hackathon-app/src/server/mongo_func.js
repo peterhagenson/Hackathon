@@ -3,7 +3,7 @@ const url = "mongodb://localhost:27017";
 
 let company;
 let employees;
-//DB Name: companyDB
+//DB Name: companydb
 //collection: employee
 mongodb.MongoClient.connect(url, (err, db) => {
     if (err || !db) {
@@ -29,6 +29,18 @@ module.exports.getAllEmployees = function (callback) {
 
 let index = 1;
 module.exports.getEmployeeById = (employeeID, callback) => {
+    index = parseInt(employeeID);
+    employees.find({employee_id: index}).project({Salary: 0}).toArray((err, result) => {
+        if (err) {
+            callback("Failed to find employee", undefined);
+        } else {
+            console.log(result);
+            callback(undefined, result);
+        }
+    });
+}
+
+module.exports.getEmployeeByIdHR = (employeeID, callback) => {
     index = parseInt(employeeID);
     employees.find({employee_id: index}).toArray((err, result) => {
         if (err) {
