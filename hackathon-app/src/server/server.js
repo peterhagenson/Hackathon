@@ -1,1 +1,55 @@
-const express = require('express')
+const express = require("express");
+const cors = require('cors');
+const dao = require("./mongo_func");
+const app = express();
+
+app.use(express.json());
+app.use(cors());
+
+app.get("/employees", (req, res) => {
+    dao.getAllEmployees((err, employees) => {
+        if(employees) {
+            console.log(employees);
+            res.send(employees);
+        } else {
+            res.statusCode = 500;
+            res.end();
+        }
+    });
+});
+
+
+app.get("/employees/:employeeID", (req, res) => {
+    dao.getEmployeeById(req.params.employeeID, (err, employee) => {
+        if (employee) {
+          console.log("GET single employee: " +  req.params.employeeID );
+          res.send(employee[0]);
+        } else {
+          res.statusCode = 404;
+          res.end();
+        }
+    });
+});
+
+app.get("/employees/login/:user/:pass", (req, res) => {
+    //console.log(req.params);
+    dao.getEmployeeByUserPass(req.params.user, req.params.pass, (err, employee) => {
+        if (employee) {
+          console.log(req.params.user);
+          console.log(req.params.pass);
+          if (employee.length == 0) {
+            console.log("Empty array, invalid login");
+            res.redirect('back');
+          }
+          res.send(employee[0]);
+        } else {
+          console.log("Didn't work as intended")
+          res.statusCode = 404;
+          res.end();
+        }
+    });
+});
+
+const port = 5000;
+console.log("Server listening on port 5000...");
+app.listen(port);

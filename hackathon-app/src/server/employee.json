@@ -1,0 +1,38 @@
+[
+    {
+        "employee_id": 1,
+        "name": "John Johnson",
+        "phone": "911-911-9111",
+        "role": "Employee",
+        "location": "Hartford",
+        "Salary": 90000,
+        "Reports": [],
+        "Manager": [2],
+        "Username": "Test1",
+        "Password": "Test1"
+    },
+    {
+        "employee_id": 2,
+        "name": "James Johnson",
+        "phone": "123-123-1234",
+        "role": "Manager",
+        "location": "Los Angeles",
+        "Salary": 120000,
+        "Reports": [1],
+        "Manager": [],
+        "Username": "Test2",
+        "Password": "Test2"
+    },
+    {
+        "employee_id": 3,
+        "name": "Jim Johnson",
+        "phone": "000-000-0009",
+        "role": "HR",
+        "location": "Madagascar",
+        "Salary": 200000000,
+        "Reports": [],
+        "Manager": [],
+        "Username": "Test3",
+        "Password": "Test3"
+    }
+]
