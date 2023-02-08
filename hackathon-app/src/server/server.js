@@ -20,6 +20,7 @@ app.get("/employees", (req, res) => {
 
 
 app.get("/employees/:employeeID", (req, res) => {
+    
     dao.getEmployeeById(req.params.employeeID, (err, employee) => {
         if (employee) {
           console.log("GET single employee: " +  req.params.employeeID );
@@ -31,8 +32,21 @@ app.get("/employees/:employeeID", (req, res) => {
     });
 });
 
+app.get("/employees/hr/:employeeID", (req, res) => {
+    
+    dao.getEmployeeByIdHR(req.params.employeeID, (err, employee) => {
+        if (employee) {
+          console.log("GET single employee: " +  req.params.employeeID );
+          res.send(employee[0]);
+        } else {
+          res.statusCode = 404;
+          res.end();
+        }
+    });
+});
+
 app.get("/employees/login/:user/:pass", (req, res) => {
-    //console.log(req.params);
+    console.log(req.method);
     dao.getEmployeeByUserPass(req.params.user, req.params.pass, (err, employee) => {
         if (employee) {
             if (employee.length == 0) {
