@@ -81,7 +81,9 @@ async function getUser(){
             <TextField size="small" sx={{mb:2}} type="text" name="password" value={password}onChange={(e)=>setPassword(e.target.value)} ></TextField>
             </label>
             <br></br>
+            <div style={header}>
             <Button sx={styles1} type="submit">Login</Button>
+            </div>
         </form>
         </div>
         </>
