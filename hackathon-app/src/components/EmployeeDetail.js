@@ -36,8 +36,11 @@ useEffect(()=>{
 
     return (
         <>
-        <p>Welcome to the Employee Detail Page</p>
-        {JSON.stringify(employee)}
+        <h3>{employee.name}</h3>
+        <p>Location: {employee.location}</p>
+        <p>Role: {employee.role}</p>
+        <p>Phone Number: {employee.phone}</p>
+        <p>Salary: ${employee.Salary}</p>
         </>
     )
 }
