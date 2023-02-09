@@ -1,11 +1,13 @@
 import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import Button from '@mui/material/Button'
+import TextField from'@mui/material/TextField'
 
 const styles1 = {
     backgroundColor: "black",
     color: "white",
     border: "3px solid black",
+    marginBottom: "13px",
     '&:hover': {
       border: "3px solid black",
       color: "black",
@@ -14,6 +16,21 @@ const styles1 = {
       // boxShadow: 20
     }
   }
+
+  const header = {
+    display: 'flex',
+    justifyContent: 'center'
+  }
+
+  const cardStyle = {
+    borderStyle: 'solid',
+    borderWidth: 'thin',
+    width: '200px',
+    borderRadius: '7px',
+    margin: '0 auto 20px', 
+    paddingLeft: '25px',
+    paddingRight: '25px'
+}
 
 function Login(){
 
@@ -50,18 +67,18 @@ async function getUser(){
  }
     return ( 
         <>
-        <h2>Welcome to the Enterprise Directory!</h2>
+        <h2 style={header}>Welcome to the Enterprise Directory!</h2>
         <div style={cardStyle}>
         <h4>Please log in to continue</h4>
         <form onSubmit={handleSubmit}>
             <label>Username:
                 <br></br>
-            <input type="text" name="username" value={userName} onChange={(e)=>setUserName(e.target.value)}></input>
+            <TextField size="small" sx={{mb:2}} type="text" name="username" value={userName} onChange={(e)=>setUserName(e.target.value)}></TextField>
             </label>
             <br></br>
             <label>Password:
                 <br></br>
-            <input type="text" name="password" value={password}onChange={(e)=>setPassword(e.target.value)} ></input>
+            <TextField size="small" sx={{mb:2}} type="text" name="password" value={password}onChange={(e)=>setPassword(e.target.value)} ></TextField>
             </label>
             <br></br>
             <Button sx={styles1} type="submit">Login</Button>
@@ -71,10 +88,6 @@ async function getUser(){
     )
 }
 
-const cardStyle = {
-    borderStyle: 'solid',
-    borderWidth: 'thin',
-    width: '300px'
-}
+
 
 export default Login
