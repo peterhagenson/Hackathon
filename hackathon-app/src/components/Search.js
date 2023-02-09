@@ -1,5 +1,28 @@
 import {useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
+import TextField from'@mui/material/TextField'
+
+const resultsContainer = {
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'space-evenly'
+  
+}
+
+const personContainer = {
+  width: '150px',
+  marginBottom: '15px'
+  
+}
+
+const cardName = {
+  fontWeight: 'bold'
+}
+
+const searchHeadingDiv = {
+  display: 'flex',
+  justifyContent: 'center'
+}
 
 
 function Search(){
@@ -46,25 +69,47 @@ function Search(){
 
         return (
            <>
-             <h1>Welcome to the Enterprise Directory!</h1>
-             <h3>Who are you looking for?</h3>
+           <div style={searchHeadingDiv}>
+             <h3>Search the Enterprise Directory:</h3> 
+             </div>
+             <div style={searchHeadingDiv}>
              <form >
-               <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}></input>
+               <TextField size="small" sx={{mb:2}} type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}></TextField>
              </form>
+             </div>
              
+             <div style={resultsContainer}>
              {filteredEmployees.map((employee)=>
-             <p onClick={()=>handleClick(employee)}>{employee?.name}</p>)}
+             
+             <div style={personContainer} onClick={()=>handleClick(employee)} >
+<div style={cardName}>{employee?.name}</div>
+<div>{employee?.location}</div>
+<div>{employee?.role}</div>
+             </div>
+             
+             )}
+             </div>
              </>)} else {
      return(
        <>
-       <h1>Welcome to the Enterprise Directory!</h1>
-             <h3>Who are you looking for?</h3>
+       
+       <div style={searchHeadingDiv}>
+             <h3>Search the Enterprise Directory:</h3>
+             </div>
+             <div style={searchHeadingDiv}>
              <form >
-               <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} ></input>
+               <TextField size="small" sx={{mb:2}} type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} ></TextField>
              </form>
+             </div>
+             <div style={resultsContainer}>
      {employees.map((employee) =>
-       <p onClick={()=>handleClick(employee)}>{employee?.name}</p>)}
-     
+      <div style={personContainer} onClick={()=>handleClick(employee)} >
+       <div style={cardName}>{employee?.name}</div>
+<div>{employee?.location}</div>
+<div>{employee?.role}</div>
+       </div>
+       )}
+     </div>
        </>
              
              
