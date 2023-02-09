@@ -20,7 +20,7 @@ app.get("/employees", (req, res) => {
 
 app.get("/employees/:employeeID", (req, res) => {
     console.log(req.query.role);
-    console.log(req.query.reports);  
+    console.log(req.query.manager);  
     if (req.query.role === "Employee") {
         dao.getEmployeeByIdNoSalary(req.params.employeeID, (err, employee) => {
             if (employee) {
@@ -36,7 +36,8 @@ app.get("/employees/:employeeID", (req, res) => {
         for (let rep of req.query.reports) {
             arr.push(parseInt(rep));
         }
-        if (arr.indexOf(parseInt(req.params.employeeID))>=0) {
+        if (arr.indexOf(parseInt(req.params.employeeID))>=0 && 
+                parseInt(req.query.manager) !== req.params.employeeID) {
             console.log("Manager view salary");
             dao.getEmployeeByIdWithSalary(req.params.employeeID, (err, employee) => {
                 if (employee) {
@@ -86,7 +87,6 @@ app.get("/employees/hr/:employeeID", (req, res) => {
 });
 
 app.get("/employees/login/:user/:pass", (req, res) => {
-    console.log(req.method);
     dao.getEmployeeByUserPass(req.params.user, req.params.pass, (err, employee) => {
         if (employee) {
             if (employee.length == 0) {
@@ -94,6 +94,19 @@ app.get("/employees/login/:user/:pass", (req, res) => {
             } else {
                 res.send(employee[0]);
             }
+         
+        } else {
+          console.log("Didn't work as intended")
+          res.statusCode = 404;
+          res.end();
+        }
+    });
+});
+
+app.put("/employees/update/:employeeID", (req, res) => {
+    dao.updateEmployeeSalary(req.params.employeeID, parseInt(req.query.salary), (err, employee) => {
+        if (employee) {
+            res.send("Updated document sucessfully");
          
         } else {
           console.log("Didn't work as intended")

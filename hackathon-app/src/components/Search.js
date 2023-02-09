@@ -16,8 +16,6 @@ function Search(){
         let results = arr.filter((el) => el.name.toLowerCase().includes(query.toLowerCase()));
       setFilteredEmployees(results)
       }
-  
-
     async function getEmployees(){
         await fetch('http://localhost:5000/employees', {
              method: 'GET',    
@@ -26,7 +24,10 @@ function Search(){
          })
          .then((response) => response.json())
          .then((e) => {
-             //console.log(e)
+             console.log(e)
+             e.sort((a, b) => {
+              return a.name.localeCompare(b.name);
+             })
              setEmployees(e)
          })
      }
@@ -36,14 +37,12 @@ function Search(){
             navigate(`/employee/${employee.employee_id}`)
      }
     
-
     useEffect(() => {
         getEmployees()
         filterEmployees(employees, searchTerm)
     },[searchTerm])
 
     if(filteredEmployees[0]) {
-
         return (
            <>
              <h1>Welcome to the Enterprise Directory!</h1>

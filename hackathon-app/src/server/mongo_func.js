@@ -62,3 +62,16 @@ module.exports.getEmployeeByUserPass = (user, pass, callback) => {
         }
     });
 }
+
+module.exports.updateEmployeeSalary = (employeeID, salary, callback) => {
+    let newVals = {$set: {Salary: salary}};
+    index = parseInt(employeeID);
+    employees.updateOne({employee_id: index}, newVals, (err, result) => {
+        if (err) {
+            callback("Failed to find employee", undefined);
+        } else {
+            console.log(result);
+            callback(undefined, result);
+        }
+    });
+}
