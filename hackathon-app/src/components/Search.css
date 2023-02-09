@@ -1,0 +1,7 @@
+.hoverMe {
+    font-weight: bold;
+}
+ 
+ .hoverMe:hover{
+    font-size: 12.5pt;
+}
