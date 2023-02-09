@@ -6,7 +6,7 @@ function Login(){
 
     let [userName, setUserName] = useState('')
     let [password, setPassword] = useState('')
-    let [user, setUser] = useState('')
+   // let [user, setUser] = useState('')
     let navigate = useNavigate();
 
 function handleSubmit(event) {
