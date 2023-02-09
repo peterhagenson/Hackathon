@@ -12,7 +12,7 @@ function Search(){
  
     //probably need to change line 13
     function filterEmployees(arr, query) {
-        console.log(arr)
+        //console.log(arr)
         let results = arr.filter((el) => el.name.toLowerCase().includes(query.toLowerCase()));
       setFilteredEmployees(results)
       }
@@ -26,7 +26,7 @@ function Search(){
          })
          .then((response) => response.json())
          .then((e) => {
-             console.log(e)
+             //console.log(e)
              setEmployees(e)
          })
      }

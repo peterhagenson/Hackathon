@@ -18,12 +18,10 @@ app.get("/employees", (req, res) => {
     });
 });
 
-
 app.get("/employees/:employeeID", (req, res) => {
-    req.body.reports = [1];
-    const arr = req.body.reports;
-    req.body.role = "Manager";
-    if (req.body.role === "Employee") {
+    console.log(req.query.role);
+    console.log(req.query.reports);  
+    if (req.query.role === "Employee") {
         dao.getEmployeeByIdNoSalary(req.params.employeeID, (err, employee) => {
             if (employee) {
               console.log("GET single employee: " +  req.params.employeeID );
@@ -33,7 +31,11 @@ app.get("/employees/:employeeID", (req, res) => {
               res.end();
             }
         });
-    } else if (req.body.role === "Manager") {
+    } else if (req.query.role === "Manager") {
+        const arr = [];
+        for (let rep of req.query.reports) {
+            arr.push(parseInt(rep));
+        }
         if (arr.indexOf(parseInt(req.params.employeeID))>=0) {
             console.log("Manager view salary");
             dao.getEmployeeByIdWithSalary(req.params.employeeID, (err, employee) => {
@@ -56,7 +58,8 @@ app.get("/employees/:employeeID", (req, res) => {
                 }
             });
         }
-    } else if (req.body.role === "HR") {
+    } else if (req.query.role === "HR") {
+        console.log("HR View")
         dao.getEmployeeByIdWithSalary(req.params.employeeID, (err, employee) => {
             if (employee) {
               console.log("GET single employee: " +  req.params.employeeID );
