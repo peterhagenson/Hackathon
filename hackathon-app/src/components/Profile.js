@@ -1,4 +1,4 @@
-//import Search from './Search.js'
+import Search from './Search.js'
 
 
 function Profile(){
@@ -12,6 +12,7 @@ function Profile(){
         <p>Role: {user.role}</p>
         <p>Phone Number: {user.phone}</p>
         <p>Salary: ${user.Salary}</p>
+        <Search />
         </>
 
     )
