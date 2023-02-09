@@ -6,7 +6,7 @@ function Login(){
 
     let [userName, setUserName] = useState('')
     let [password, setPassword] = useState('')
-    let [user, setUser] = useState('')
+    //let [user, setUser] = useState('')
     let navigate = useNavigate();
 
 function handleSubmit(event) {
@@ -25,7 +25,7 @@ async function getUser(){
      .then((response) => response.json())
      .then((u) => {
          console.log(u)
-         setUser(u)
+         //setUser(u)
          if(Object.keys(u).length > 0) {
             localStorage.setItem("user", JSON.stringify(u));
             navigate('/profile');
