@@ -1,23 +1,29 @@
 import {useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
-import TextField from'@mui/material/TextField'
+import TextField from'@mui/material/TextField' 
+import './Search.css'
 
 const resultsContainer = {
   display: 'flex',
   flexWrap: 'wrap',
-  justifyContent: 'space-evenly'
+  justifyContent: 'space-around',
+  marginLeft: '100px',
+  marginRight: '100px'
   
 }
 
 const personContainer = {
   width: '150px',
-  marginBottom: '15px'
-  
+  marginBottom: '30px',
+ 
 }
 
+
+
 const cardName = {
-  fontWeight: 'bold'
-}
+  fontWeight: 'bold',
+  }
+
 
 const searchHeadingDiv = {
   display: 'flex',
@@ -74,7 +80,7 @@ function Search(){
              </div>
              <div style={searchHeadingDiv}>
              <form >
-               <TextField size="small" sx={{mb:2}} type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}></TextField>
+               <TextField size="small" sx={{mb:4}} type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}></TextField>
              </form>
              </div>
              
@@ -82,7 +88,7 @@ function Search(){
              {filteredEmployees.map((employee)=>
              
              <div style={personContainer} onClick={()=>handleClick(employee)} >
-<div style={cardName}>{employee?.name}</div>
+<div className="hoverMe">{employee?.name}</div>
 <div>{employee?.location}</div>
 <div>{employee?.role}</div>
              </div>
@@ -104,7 +110,7 @@ function Search(){
              <div style={resultsContainer}>
      {employees.map((employee) =>
       <div style={personContainer} onClick={()=>handleClick(employee)} >
-       <div style={cardName}>{employee?.name}</div>
+       <div className="hoverMe">{employee?.name}</div>
 <div>{employee?.location}</div>
 <div>{employee?.role}</div>
        </div>
