@@ -24,20 +24,20 @@ const detailsDiv = {
   }
 
   const styles1 = {
-    backgroundColor: "black",
-    color: "white",
-    border: "3px solid black",
+    backgroundColor: "white",
+    color: "#e01719",
+    border: "3px solid #e01719",
+    //border: "3px solid black",
     marginBottom: "13px",
     fontWeight: 'bold',
-
     '&:hover': {
-      border: "3px solid black",
-      color: "black",
-      backgroundColor: "white",
+      
+      color: "white",
+      backgroundColor: "#e01719",
       fontWeight: 'bold',
       // boxShadow: 20
     }
-  }
+  } 
 
 
 function EmployeeDetail(){
