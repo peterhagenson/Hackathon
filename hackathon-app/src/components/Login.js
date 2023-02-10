@@ -96,12 +96,12 @@ async function getUser(){
         <form onSubmit={handleSubmit}>
             <label>Username:
                 <br></br>
-            <TextField size="small" sx={{mb:2}} type="text" name="username" value={userName} onChange={(e)=>setUserName(e.target.value)}></TextField>
+            <TextField autoComplete="off" size="small" sx={{mb:2}} type="text" name="username" value={userName} onChange={(e)=>setUserName(e.target.value)}></TextField>
             </label>
             <br></br>
             <label>Password:
                 <br></br>
-            <TextField size="small" sx={{mb:2}} type="text" name="password" value={password}onChange={(e)=>setPassword(e.target.value)} ></TextField>
+            <TextField autoComplete="off" size="small" sx={{mb:2}} type="text" name="password" value={password}onChange={(e)=>setPassword(e.target.value)} ></TextField>
             </label>
             <br></br>
             <div style={btnDiv}>
