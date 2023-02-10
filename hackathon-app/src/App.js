@@ -3,11 +3,13 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Login from './components/Login.js'
 import EmployeeDetail from './components/EmployeeDetail.js'
 import Profile from './components/Profile.js'
+import Header from './components/Header.js'
 
 
 function App() {
   return (
     <div className="App">
+      <Header />
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<Login/>}/>
