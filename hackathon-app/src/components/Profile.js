@@ -35,14 +35,15 @@ const headingDiv = {
 
 function Profile(){
     const user = JSON.parse(localStorage.getItem("user"));
-    let [managers, setManagers] = useState([]);
-    let [reports, setReports] = useState([]);
+    //let [managers, setManagers] = useState([]);
+    //let [reports, setReports] = useState([]);
     let directReports = ""
     for (let rep of user.Reports) {
         directReports += `&reports=${rep}`;
     }
 
     async function getManagers(){
+      console.log('in get managers')
         await fetch(`http://localhost:5000/managers`, {
              method: 'GET',    
          withCredentials: true,    
@@ -51,8 +52,9 @@ function Profile(){
          })
          .then((response) => response.json())
          .then((employees) => {
+          console.log('test', employees)
              localStorage.setItem("managers", JSON.stringify(employees));
-             setManagers(employees)
+            // setManagers(employees)
     })}
 
     async function getReports(){
@@ -65,29 +67,30 @@ function Profile(){
          .then((response) => response.json())
          .then((employees) => {
              localStorage.setItem("reports", JSON.stringify(employees));
-             setReports(employees)
+             //setReports(employees)
     })}
 
-    useEffect(()=>{
-        getManagers();
-        getReports();
-    },[])
+   
     let hasManager = false;
     let userManager;
     let hasReports = false;
     let reportsDiv = "";
+    const managers = JSON.parse(localStorage.getItem('managers')||'[]')
+
+    console.log(localStorage.getItem("managers"))
     if (user.Manager.length > 0) {
         hasManager = true;
-        for (let ma of JSON.parse(localStorage.getItem("managers"))) {
+        for (let ma of managers) {
             if (ma.employee_id == user.Manager[0]) {
                 userManager = ma.name;
             }
         }
     }
+    const employees = JSON.parse(localStorage.getItem('employeesList')||'[]')
     if (user.Reports.length > 0) {
         hasReports = true;
         for (let r of user.Reports) {
-            for (let e of JSON.parse(localStorage.getItem("employeesList"))) {
+            for (let e of employees) {
                 if (r === e.employee_id) {
                     console.log(e.name);
                     reportsDiv += e.name + " ";
@@ -96,7 +99,10 @@ function Profile(){
             }
         }
     }
-    
+    useEffect(()=>{
+      getManagers();
+      getReports();
+  },[])
     return (
         <>
         <div style={headingDiv}>
