@@ -42,12 +42,14 @@ const detailsDiv = {
 
 function EmployeeDetail(){
 
+    
+
     let id = useParams();
     //console.log(id)
     let [salary, setSalary] = useState(0);
     let [employee, setEmployee] = useState({})
     let [reports, setReports] = useState([]);
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem("user")||'{}');
     let reportString = "";
     let managerString = "";
     let hasReports = false;
@@ -77,6 +79,7 @@ function EmployeeDetail(){
          })
          .then((response) => response.json())
          .then((employee) => {
+            console.log(employee)
             localStorage.setItem("current", JSON.stringify(employee));
              setEmployee(employee)
             
@@ -96,11 +99,13 @@ function EmployeeDetail(){
     let employeeManager;
     let haveReports = false;
     let reportsDiv = "";
-    let currentEmployee = JSON.parse(localStorage.getItem("current"))
-    if (currentEmployee.Manager.length > 0) {
+    let currentEmployee = JSON.parse(localStorage.getItem("current") ||'{}')
+    const managers = JSON.parse(localStorage.getItem('managers')||'[]')
+    const employees = JSON.parse(localStorage.getItem('employeesList')||'[]')
+    if (employee.Manager.length > 0) {
         hasManager = true;
-        for (let ma of JSON.parse(localStorage.getItem("managers"))) {
-            if (ma.employee_id === JSON.parse(localStorage.getItem("current")).Manager[0]) {
+        for (let ma of managers) {
+            if (ma.employee_id === currentEmployee.Manager[0]) {
                 employeeManager = ma.name;
             }
         }
@@ -109,7 +114,7 @@ function EmployeeDetail(){
         haveReports = true;
         console.log(haveReports);
         for (let r of currentEmployee.Reports) {
-            for (let e of JSON.parse(localStorage.getItem("employeesList"))) {
+            for (let e of employees) {
                 if (r === e.employee_id) {
                     console.log(e.name);
                     reportsDiv += e.name + " ";
@@ -119,9 +124,9 @@ function EmployeeDetail(){
         }
     }
 
-useEffect(()=>{
-    getEmployee()
-},[])
+    useEffect(()=>{
+        getEmployee()
+    },[])
 
     return (
         <>
