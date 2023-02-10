@@ -14,7 +14,7 @@ const resultsContainer = {
 
 const personContainer = {
   width: '150px',
-  marginBottom: '30px',
+  marginBottom: '30px', 
  
 }
 
@@ -22,6 +22,11 @@ const personContainer = {
 
 const cardName = {
   fontWeight: 'bold',
+
+  }
+
+  const cardText = {
+    textAlign: 'center'
   }
 
 
@@ -88,8 +93,8 @@ function Search(){
              
              <div style={personContainer} onClick={()=>handleClick(employee)} >
 <div className="hoverMe">{employee?.name}</div>
-<div>{employee?.location}</div>
-<div>{employee?.role}</div>
+<div style={cardText}>{employee?.location}</div>
+<div style={cardText}>{employee?.role}</div>
              </div>
              
              )}
@@ -110,8 +115,8 @@ function Search(){
      {employees.map((employee) =>
       <div style={personContainer} onClick={()=>handleClick(employee)} >
        <div className="hoverMe">{employee?.name}</div>
-<div>{employee?.location}</div>
-<div>{employee?.role}</div>
+<div style={cardText}>{employee?.location}</div>
+<div style={cardText}>{employee?.role}</div>
        </div>
        )}
      </div>
