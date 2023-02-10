@@ -17,16 +17,28 @@ const styles1 = {
       fontWeight: 'bold',
       // boxShadow: 20
     }
+  }  
+
+  const loginMessage = {
+    paddingTop: "13px"
   }
 
   const background = {
-    backgroundColor: '#f6f6f6'
+    backgroundColor: '#f6f6f6',
+    height: '100vh'
   }
 
   const header = {
     display: 'flex',
     justifyContent: 'center',
-    color: '#46494d'
+    color: '#46494d',
+    paddingTop: "50px"
+  }
+
+  const btnDiv = {
+    display: 'flex',
+    justifyContent: 'center',
+    color: '#46494d',
   }
 
   const cardStyle = {
@@ -80,7 +92,7 @@ async function getUser(){
         <div style={background}>
         <h2 style={header}>Welcome to the Enterprise Directory!</h2>
         <div style={cardStyle}>
-        <h4>Please log in to continue</h4>
+        <h4 style={loginMessage}>Please log in to continue</h4>
         <form onSubmit={handleSubmit}>
             <label>Username:
                 <br></br>
@@ -92,7 +104,7 @@ async function getUser(){
             <TextField size="small" sx={{mb:2}} type="text" name="password" value={password}onChange={(e)=>setPassword(e.target.value)} ></TextField>
             </label>
             <br></br>
-            <div style={header}>
+            <div style={btnDiv}>
             <Button sx={styles1} type="submit">Login</Button>
             </div>
         </form>

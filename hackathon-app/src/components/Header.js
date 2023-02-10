@@ -9,10 +9,18 @@ function Header() {
        // fontStyle: 'freightSans'
     }
 
+    const headerText = {
+        marginLeft: '25px', 
+        paddingTop: '25px',
+        display: 'flex',
+    }
+
 
     return(
         <div style={headerDiv}>
-        <h1>Enterprise Directory</h1>
+            <div></div>
+        <h1 style={headerText}>Enterprise Directory</h1>
+        <div></div>
         </div>
     )
 
