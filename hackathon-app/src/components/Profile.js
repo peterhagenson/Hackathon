@@ -2,6 +2,7 @@ import { borderBottom } from '@mui/system';
 import { useState, useEffect } from 'react'
 import Search from './Search.js'
 import EmployeeDetail from './EmployeeDetail.js'
+import {useNavigate} from 'react-router-dom'
 
 
 
@@ -38,12 +39,25 @@ const valueStyle = {
   fontSize: '14pt'
 
 }
+
+const valueStyle2 = {
+  fontStyle: 'normal',
+  fontSize: '12pt',
+  fontWeight: 'bold',
+  marginBottom: '7px', 
+  paddingLeft: '15px'
+}
+
+
 const flexThat = {
   display: 'flex',
   
 }
 
 function Profile(){
+
+const navigate = useNavigate()
+
     const user = JSON.parse(localStorage.getItem("user"));
     //let [managers, setManagers] = useState([]);
     //let [reports, setReports] = useState([]);
@@ -85,6 +99,7 @@ function Profile(){
     let userManager;
     let hasReports = false;
     let reportsDiv = "";
+    let reportsArr = []
     const managers = JSON.parse(localStorage.getItem('managers')||'[]')
 
     console.log(localStorage.getItem("managers"))
@@ -104,10 +119,16 @@ function Profile(){
                 if (r === e.employee_id) {
                     console.log(e.name);
                     reportsDiv += e.name + " ";
+                    reportsArr.push(e)
                     continue;
                 }
             }
         }
+    }
+
+    function handleClick(id) {
+      console.log(id)
+      navigate(`/employee/${id}`)
     }
     useEffect(()=>{
       getManagers();
@@ -127,8 +148,12 @@ function Profile(){
         <div style={propertyStyle}>Role: <span style={valueStyle}>{user.role}</span></div>
         <div style={propertyStyle}>Phone Number: <span style={valueStyle}>{user.phone}</span></div>
         <div style={propertyStyle}>Salary: <span style={valueStyle}>${user.Salary}</span></div>
-        {hasManager && (<div style={propertyStyle}>Reports to: <span style={valueStyle}>{userManager}</span></div>)}
-        {hasReports && (<div style={propertyStyle}>Direct Reports: <span style={valueStyle}>{reportsDiv}</span></div>)}
+        {hasManager && (<div style={propertyStyle}>Reports To: <span style={valueStyle}>{userManager}</span></div>)}
+        {hasReports && <div style={propertyStyle}>Direct Reports: </div>}
+        {hasReports && reportsArr.map((report)=>
+        <div onClick={(e)=> handleClick(report.employee_id)} style={valueStyle2}>{report.name}</div>)}
+       
+    
         </div>
         <div style={lastProfileElement}></div>
       </div>
