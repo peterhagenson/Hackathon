@@ -1,5 +1,7 @@
 .hoverMe {
     font-weight: bold;
+    text-align: center;
+    
 }
  
  .hoverMe:hover{

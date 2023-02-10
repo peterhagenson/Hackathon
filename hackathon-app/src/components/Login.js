@@ -4,33 +4,54 @@ import Button from '@mui/material/Button'
 import TextField from'@mui/material/TextField'
 
 const styles1 = {
-    backgroundColor: "black",
-    color: "white",
-    border: "3px solid black",
+    backgroundColor: "white",
+    color: "#e01719",
+    border: "3px solid #e01719",
+    //border: "3px solid black",
     marginBottom: "13px",
     fontWeight: 'bold',
     '&:hover': {
-      border: "3px solid black",
-      color: "black",
-      backgroundColor: "white",
+      
+      color: "white",
+      backgroundColor: "#e01719",
       fontWeight: 'bold',
       // boxShadow: 20
     }
+  }  
+
+  const loginMessage = {
+    paddingTop: "13px"
+  }
+
+  const background = {
+    backgroundColor: '#f6f6f6',
+    height: '100vh'
   }
 
   const header = {
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    color: '#46494d',
+    paddingTop: "50px"
+  }
+
+  const btnDiv = {
+    display: 'flex',
+    justifyContent: 'center',
+    color: '#46494d',
   }
 
   const cardStyle = {
     borderStyle: 'solid',
     borderWidth: 'thin',
+    borderColor: "#46494d",
     width: '200px',
     borderRadius: '7px',
     margin: '0 auto 20px', 
     paddingLeft: '25px',
-    paddingRight: '25px'
+    paddingRight: '25px',
+    backgroundColor: 'white',
+    color:'#46494d'
 }
 
 function Login(){
@@ -68,9 +89,10 @@ async function getUser(){
  }
     return ( 
         <>
+        <div style={background}>
         <h2 style={header}>Welcome to the Enterprise Directory!</h2>
         <div style={cardStyle}>
-        <h4>Please log in to continue</h4>
+        <h4 style={loginMessage}>Please log in to continue</h4>
         <form onSubmit={handleSubmit}>
             <label>Username:
                 <br></br>
@@ -82,10 +104,11 @@ async function getUser(){
             <TextField size="small" sx={{mb:2}} type="text" name="password" value={password}onChange={(e)=>setPassword(e.target.value)} ></TextField>
             </label>
             <br></br>
-            <div style={header}>
+            <div style={btnDiv}>
             <Button sx={styles1} type="submit">Login</Button>
             </div>
         </form>
+        </div>
         </div>
         </>
     )
