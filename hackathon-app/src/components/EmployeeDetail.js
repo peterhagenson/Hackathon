@@ -102,7 +102,7 @@ function EmployeeDetail(){
     let currentEmployee = JSON.parse(localStorage.getItem("current") ||'{}')
     const managers = JSON.parse(localStorage.getItem('managers')||'[]')
     const employees = JSON.parse(localStorage.getItem('employeesList')||'[]')
-    if (employee.Manager.length > 0) {
+    if (employee.Manager?.length > 0) {
         hasManager = true;
         for (let ma of managers) {
             if (ma.employee_id === currentEmployee.Manager[0]) {
@@ -110,7 +110,7 @@ function EmployeeDetail(){
             }
         }
     }
-    if (currentEmployee.Reports.length > 0) {
+    if (currentEmployee.Reports?.length > 0) {
         haveReports = true;
         console.log(haveReports);
         for (let r of currentEmployee.Reports) {
