@@ -1,5 +1,43 @@
 import {useParams} from 'react-router-dom'
 import {useState, useEffect} from 'react'
+import Button from '@mui/material/Button'
+import TextField from'@mui/material/TextField'
+
+const detailsDiv = {
+    width: 'fit-content',
+    margin: '0 auto 20px', 
+    paddingLeft: '25px',
+    paddingRight: '25px',
+    marginTop: '100px'
+  }
+
+  const propertyStyle = {
+    fontStyle: 'italic',
+    fontSize: '12pt',
+    marginBottom: '3px'
+  }  
+
+  const valueStyle = {
+    fontStyle: 'normal',
+    fontSize: '14pt'
+
+  }
+
+  const styles1 = {
+    backgroundColor: "black",
+    color: "white",
+    border: "3px solid black",
+    marginBottom: "13px",
+    fontWeight: 'bold',
+
+    '&:hover': {
+      border: "3px solid black",
+      color: "black",
+      backgroundColor: "white",
+      fontWeight: 'bold',
+      // boxShadow: 20
+    }
+  }
 
 
 function EmployeeDetail(){
@@ -25,9 +63,10 @@ function EmployeeDetail(){
 
     function handleSubmit(event) {
         event.preventDefault();
-        //console.log(salary)
+        console.log(salary)
         updateEmployee(salary);
-        getEmployee();
+        setSalary(0)
+        //getEmployee();
     }
 
     async function getEmployee(){
@@ -49,6 +88,7 @@ function EmployeeDetail(){
          withCredentials: true,    
              crossorigin: true         
          })
+         getEmployee();
     }
 
 useEffect(()=>{
@@ -57,22 +97,26 @@ useEffect(()=>{
 
     return (
         <>
-        <h3>{employee.name}</h3>
-        <p>Location: {employee.location}</p>
-        <p>Role: {employee.role}</p>
-        <p>Phone Number: {employee.phone}</p>
         
+        <div style={detailsDiv}>
+        <div style={propertyStyle}>Employee Name: <span style={valueStyle}>{employee.name}</span></div>
+        <div style={propertyStyle}>Location: <span style={valueStyle}>{employee.location}</span></div>
+        <div style={propertyStyle}>Role: <span style={valueStyle}>{employee.role}</span></div>
+        <div style={propertyStyle}>Phone Number: <span style={valueStyle}>{employee.phone}</span></div>
+        <div>{employee.Salary &&
+        <div style={propertyStyle}>Salary: <span style={valueStyle}>${employee.Salary}</span></div>}</div>
         {hasReports && user.Reports.indexOf(employee.employee_id) >= 0 && (
             <div>
-                <p>Salary: ${employee.Salary}</p>
-                <br />
                 <p>Edit this employee's salary: </p>
                 <form onSubmit={handleSubmit}>
-                <input type="number" name="salary" value={salary} onChange={(e)=>setSalary(e.target.value)}></input>
-                <button type="submit">Update Salary</button>
+                <TextField size="small" sx={{mr:2}} type="number" name="salary" value={salary} onChange={(e)=>setSalary(e.target.value)}></TextField>
+                <Button sx={styles1} type="submit">Update Salary</Button>
                 </form>
             </div>
         )}
+        </div>
+        
+        
         
         </>
     )

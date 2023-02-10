@@ -8,6 +8,7 @@ const styles1 = {
     color: "white",
     border: "3px solid black",
     marginBottom: "13px",
+    fontWeight: 'bold',
     '&:hover': {
       border: "3px solid black",
       color: "black",
