@@ -75,3 +75,25 @@ module.exports.updateEmployeeSalary = (employeeID, salary, callback) => {
         }
     });
 }
+
+module.exports.getManagers = function(callback) {
+    let manager = "Manager";
+    employees.find({role: manager}).project({employee_id: 1, name: 1, Reports:1 }).toArray((err, result) => {
+        if (err) {
+            callback("Failed to find films", undefined);
+        } else {
+            callback(undefined, result);
+        }
+    });
+}
+
+module.exports.getReports = (reportsArray, callback) => {
+    employees.find({employee_id: {$in: reportsArray}}).project({employee_id: 1, name: 1, Reports:1 }).toArray((err, result) => {
+        if (err) {
+            callback("Failed to find films", undefined);
+        } else {
+            console.log(result);
+            callback(undefined, result);
+        }
+    });
+}

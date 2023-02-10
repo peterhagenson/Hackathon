@@ -9,7 +9,7 @@ app.use(cors());
 app.get("/employees", (req, res) => {
     dao.getAllEmployees((err, employees) => {
         if(employees) {
-            console.log(employees);
+            //console.log(employees);
             res.send(employees);
         } else {
             res.statusCode = 500;
@@ -19,8 +19,6 @@ app.get("/employees", (req, res) => {
 });
 
 app.get("/employees/:employeeID", (req, res) => {
-    console.log(req.query.role);
-    console.log(req.query.manager);  
     if (req.query.role === "Employee") {
         dao.getEmployeeByIdNoSalary(req.params.employeeID, (err, employee) => {
             if (employee) {
@@ -32,7 +30,7 @@ app.get("/employees/:employeeID", (req, res) => {
             }
         });
     } else if (req.query.role === "Manager") {
-        const arr = [];
+        let arr = [];
         for (let rep of req.query.reports) {
             arr.push(parseInt(rep));
         }
@@ -99,6 +97,34 @@ app.get("/employees/login/:user/:pass", (req, res) => {
           console.log("Didn't work as intended")
           res.statusCode = 404;
           res.end();
+        }
+    });
+});
+
+app.get("/managers", (req, res) => {
+    dao.getManagers((err, employees) => {
+        if(employees) {
+            //console.log(employees);
+            res.send(employees);
+        } else {
+            res.statusCode = 500;
+            res.end();
+        }
+    });
+});
+
+app.get("/reports", (req, res) => {
+    let reportsArr = [];
+    for (let rep of req.query.reports) {
+        reportsArr.push(parseInt(rep));
+    }
+    console.log(reportsArr);
+    dao.getReports(reportsArr, (err, employees) => {
+        if(employees) {
+            res.send(employees);
+        } else {
+            res.statusCode = 500;
+            res.end();
         }
     });
 });

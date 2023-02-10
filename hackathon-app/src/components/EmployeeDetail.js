@@ -46,7 +46,7 @@ function EmployeeDetail(){
     //console.log(id)
     let [salary, setSalary] = useState(0);
     let [employee, setEmployee] = useState({})
-    let [canEdit, setCanEdit] = useState(false);
+    let [reports, setReports] = useState([]);
     const user = JSON.parse(localStorage.getItem("user"));
     let reportString = "";
     let managerString = "";
@@ -60,7 +60,6 @@ function EmployeeDetail(){
     if (user.Manager.length > 0) {
         managerString += `&manager=${user.Manager[0]}`;
     }
-
     function handleSubmit(event) {
         event.preventDefault();
         console.log(salary)
@@ -78,7 +77,9 @@ function EmployeeDetail(){
          })
          .then((response) => response.json())
          .then((employee) => {
+            localStorage.setItem("current", JSON.stringify(employee));
              setEmployee(employee)
+            
     })}
 
     async function updateEmployee(psalary) {
@@ -89,6 +90,33 @@ function EmployeeDetail(){
              crossorigin: true         
          })
          getEmployee();
+    }
+    
+    let hasManager = false;
+    let employeeManager;
+    let haveReports = false;
+    let reportsDiv = "";
+    let currentEmployee = JSON.parse(localStorage.getItem("current"))
+    if (currentEmployee.Manager.length > 0) {
+        hasManager = true;
+        for (let ma of JSON.parse(localStorage.getItem("managers"))) {
+            if (ma.employee_id === JSON.parse(localStorage.getItem("current")).Manager[0]) {
+                employeeManager = ma.name;
+            }
+        }
+    }
+    if (currentEmployee.Reports.length > 0) {
+        haveReports = true;
+        console.log(haveReports);
+        for (let r of currentEmployee.Reports) {
+            for (let e of JSON.parse(localStorage.getItem("employeesList"))) {
+                if (r === e.employee_id) {
+                    console.log(e.name);
+                    reportsDiv += e.name + " ";
+                    continue;
+                }
+            }
+        }
     }
 
 useEffect(()=>{
@@ -105,6 +133,8 @@ useEffect(()=>{
         <div style={propertyStyle}>Phone Number: <span style={valueStyle}>{employee.phone}</span></div>
         <div>{employee.Salary &&
         <div style={propertyStyle}>Salary: <span style={valueStyle}>${employee.Salary}</span></div>}</div>
+        {hasManager && (<div style={propertyStyle}>Reports to: <span style={valueStyle}>{employeeManager}</span></div>)}
+        {haveReports && (<div style={propertyStyle}>Direct Reports: <span style={valueStyle}>{reportsDiv}</span></div>)}
         {hasReports && user.Reports.indexOf(employee.employee_id) >= 0 && (
             <div>
                 <p>Edit this employee's salary: </p>

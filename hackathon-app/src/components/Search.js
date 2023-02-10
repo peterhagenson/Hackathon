@@ -53,10 +53,11 @@ function Search(){
          })
          .then((response) => response.json())
          .then((e) => {
-             console.log(e)
+             //console.log(e)
              e.sort((a, b) => {
               return a.name.localeCompare(b.name);
              })
+             localStorage.setItem("employeesList", JSON.stringify(e))
              setEmployees(e)
          })
      }
