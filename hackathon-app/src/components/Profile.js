@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react'
 import Search from './Search.js'
 import EmployeeDetail from './EmployeeDetail.js'
 
+
+
 const lastProfileElement = {
   paddingBottom: '10px',
   //borderRight: 'solid'
@@ -113,6 +115,7 @@ function Profile(){
   },[])
     return (
         <>
+        
         <div style={flexThat}>
       <div style={{width:'25%', borderRight: 'solid', borderWidth: 'thin', borderColor: '#46494d', height: '100vh'}}>
         <div style={headingDiv}>
