@@ -15,6 +15,7 @@ const resultsContainer = {
 const personContainer = {
   width: '150px',
   marginBottom: '30px', 
+  color: '#46494d'
  
 }
 
@@ -32,7 +33,16 @@ const cardName = {
 
 const searchHeadingDiv = {
   display: 'flex',
-  justifyContent: 'center'
+  justifyContent: 'center',
+  paddingTop: '35px',
+  color: '#46494d'
+  
+}
+
+const searchFieldDiv = {
+  display: 'flex',
+  justifyContent: 'center',
+  
 }
 
 
@@ -82,9 +92,9 @@ function Search(){
            <div style={searchHeadingDiv}>
              <h3>Search the Enterprise Directory:</h3> 
              </div>
-             <div style={searchHeadingDiv}>
+             <div style={searchFieldDiv}>
              <form >
-               <TextField size="small" sx={{mb:4}} type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}></TextField>
+               <TextField size="small" sx={{mb:4, mt:1}} type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}></TextField>
              </form>
              </div>
              
@@ -106,9 +116,9 @@ function Search(){
        <div style={searchHeadingDiv}>
              <h3>Search the Enterprise Directory:</h3>
              </div>
-             <div style={searchHeadingDiv}>
+             <div style={searchFieldDiv}>
              <form >
-               <TextField size="small" sx={{mb:2}} type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} ></TextField>
+               <TextField size="small" sx={{mb:4, mt:1}} type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} ></TextField>
              </form>
              </div>
              <div style={resultsContainer}>
