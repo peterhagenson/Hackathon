@@ -2,6 +2,9 @@ import { borderBottom } from '@mui/system';
 import { useState, useEffect } from 'react'
 import Search from './Search.js'
 import EmployeeDetail from './EmployeeDetail.js'
+import {useNavigate} from 'react-router-dom'
+import './Search.css'
+
 
 
 
@@ -33,17 +36,41 @@ const propertyStyle = {
   marginBottom: '7px'
 }
 
+const reportStyle = {
+  fontStyle: 'italic',
+  fontSize: '12pt',
+  marginBottom: '7px', 
+  paddingTop: '15px',
+  textDecoration: 'underline'
+}
+
+
 const valueStyle = {
   fontStyle: 'normal',
   fontSize: '14pt'
 
 }
+
+const valueStyle2 = {
+  fontStyle: 'normal',
+  fontSize: '12pt',
+  fontWeight: 'bold',
+  marginBottom: '7px', 
+  paddingLeft: '15px',
+  '&:hover': {
+    fontSize: '12.5pt'
+}}
+
+
 const flexThat = {
   display: 'flex',
   
 }
 
 function Profile(){
+
+const navigate = useNavigate()
+
     const user = JSON.parse(localStorage.getItem("user"));
     //let [managers, setManagers] = useState([]);
     //let [reports, setReports] = useState([]);
@@ -85,6 +112,7 @@ function Profile(){
     let userManager;
     let hasReports = false;
     let reportsDiv = "";
+    let reportsArr = []
     const managers = JSON.parse(localStorage.getItem('managers')||'[]')
 
     console.log(localStorage.getItem("managers"))
@@ -104,13 +132,22 @@ function Profile(){
                 if (r === e.employee_id) {
                     console.log(e.name);
                     reportsDiv += e.name + " ";
+                    reportsArr.push(e)
                     continue;
                 }
             }
         }
     }
+<<<<<<< HEAD
     let formattedSalary = user.Salary.toLocaleString("en-US");
     console.log(formattedSalary);
+=======
+
+    function handleClick(id) {
+      console.log(id)
+      navigate(`/employee/${id}`)
+    }
+>>>>>>> directReportsMap
     useEffect(()=>{
       getManagers();
       getReports();
@@ -128,9 +165,19 @@ function Profile(){
         <div style={propertyStyle}>Location: <span style={valueStyle}>{user.location}</span></div>
         <div style={propertyStyle}>Role: <span style={valueStyle}>{user.role}</span></div>
         <div style={propertyStyle}>Phone Number: <span style={valueStyle}>{user.phone}</span></div>
+<<<<<<< HEAD
         <div style={propertyStyle}>Salary: <span style={valueStyle}>${formattedSalary}</span></div>
         {hasManager && (<div style={propertyStyle}>Reports to: <span style={valueStyle}>{userManager}</span></div>)}
         {hasReports && (<div style={propertyStyle}>Direct Reports: <span style={valueStyle}>{reportsDiv}</span></div>)}
+=======
+        <div style={propertyStyle}>Salary: <span style={valueStyle}>${user.Salary}</span></div>
+        {hasManager && (<div style={propertyStyle}>Reports To: <span style={valueStyle}>{userManager}</span></div>)}
+        {hasReports && <div style={reportStyle}>Direct Reports: </div>}
+        {hasReports && reportsArr.map((report)=>
+        <div onClick={(e)=> handleClick(report.employee_id)} className="hoverMeReports"  >{report.name}</div>)}
+       
+    
+>>>>>>> directReportsMap
         </div>
         <div style={lastProfileElement}></div>
       </div>

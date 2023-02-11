@@ -2,13 +2,15 @@ import {useParams} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import Button from '@mui/material/Button'
 import TextField from'@mui/material/TextField'
+import {useNavigate} from 'react-router-dom'
+
 
 const detailsDiv = {
     width: 'fit-content',
     margin: '0 auto 20px', 
     paddingLeft: '25px',
     paddingRight: '25px',
-    marginTop: '100px'
+    marginTop: '30px'
   }
 
   const propertyStyle = {
@@ -24,25 +26,37 @@ const detailsDiv = {
   }
 
   const styles1 = {
-    backgroundColor: "black",
-    color: "white",
-    border: "3px solid black",
+    backgroundColor: "white",
+    color: "#e01719",
+    border: "3px solid #e01719",
+    //border: "3px solid black",
     marginBottom: "13px",
     fontWeight: 'bold',
-
     '&:hover': {
-      border: "3px solid black",
-      color: "black",
-      backgroundColor: "white",
+      
+      color: "white",
+      backgroundColor: "#e01719",
       fontWeight: 'bold',
       // boxShadow: 20
     }
+  } 
+
+  const reportStyle = {
+    fontStyle: 'italic',
+    fontSize: '12pt',
+    marginBottom: '7px', 
+    paddingTop: '15px',
+    textDecoration: 'underline'
+  }
+
+  const editSalary = {
+    paddingTop: '7px'
   }
 
 
 function EmployeeDetail(){
 
-    
+    const navigate = useNavigate();
 
     let id = useParams();
     //console.log(id)
@@ -99,6 +113,7 @@ function EmployeeDetail(){
     let employeeManager;
     let haveReports = false;
     let reportsDiv = "";
+    let reportsArr = []
     let currentEmployee = JSON.parse(localStorage.getItem("current") ||'{}')
     const managers = JSON.parse(localStorage.getItem('managers')||'[]')
     const employees = JSON.parse(localStorage.getItem('employeesList')||'[]')
@@ -115,20 +130,40 @@ function EmployeeDetail(){
         for (let r of currentEmployee.Reports) {
             for (let e of employees) {
                 if (r === e.employee_id) {
-                    console.log(e.name);
+                   // console.log(e.name);
                     reportsDiv += e.name + " ";
+                    reportsArr.push(e)
+                
                     continue;
                 }
+               
             }
         }
+        console.log(reportsArr)
     }
+
+    function handleClick(id) {
+        console.log(id)
+       navigate(`/employee/${id}`)
+       
+      }
+
+      function handleBack(){
+        navigate('/profile')
+      }
 
     useEffect(()=>{
         getEmployee()
-    },[])
+    },[id])
 
     return (
         <>
+<<<<<<< HEAD
+=======
+        <div style={{ marginTop: '25px', marginLeft: '25px'}}>
+        <Button sx={styles1} onClick={handleBack} type="submit">Back to Search</Button>
+        </div>
+>>>>>>> directReportsMap
         <div style={detailsDiv}>
         <div style={propertyStyle}>Employee Name: <span style={valueStyle}>{employee.name}</span></div>
         <div style={propertyStyle}>Location: <span style={valueStyle}>{employee.location}</span></div>
@@ -137,18 +172,22 @@ function EmployeeDetail(){
         <div>{employee.Salary &&
         <div style={propertyStyle}>Salary: <span style={valueStyle}>${employee?.Salary.toLocaleString("en-US")}</span></div>}</div>
         {hasManager && (<div style={propertyStyle}>Reports to: <span style={valueStyle}>{employeeManager}</span></div>)}
-        {haveReports && (<div style={propertyStyle}>Direct Reports: <span style={valueStyle}>{reportsDiv}</span></div>)}
+       
         {hasReports && user.Reports.indexOf(employee.employee_id) >= 0 && (
-            <div>
+            <div style={editSalary}>
                 <p>Edit this employee's salary: </p>
                 <form onSubmit={handleSubmit}>
                 <TextField size="small" sx={{mr:2}} type="number" name="salary" value={salary} onChange={(e)=>setSalary(e.target.value)}></TextField>
                 <Button sx={styles1} type="submit">Update Salary</Button>
                 </form>
             </div>
+            
         )}
-        </div>
+        {hasReports && reportsArr[0] != null && <div style={reportStyle}>Direct Reports: </div>}
+        {hasReports && reportsArr.map((report)=>
+        <div onClick={(e)=> handleClick(report.employee_id)} className="hoverMeReports"  >{report.name}</div>)}
         
+        </div>
         
         
         </>
