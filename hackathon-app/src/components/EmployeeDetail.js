@@ -112,7 +112,6 @@ function EmployeeDetail(){
     }
     if (currentEmployee.Reports?.length > 0) {
         haveReports = true;
-        console.log(haveReports);
         for (let r of currentEmployee.Reports) {
             for (let e of employees) {
                 if (r === e.employee_id) {
@@ -130,14 +129,13 @@ function EmployeeDetail(){
 
     return (
         <>
-        
         <div style={detailsDiv}>
         <div style={propertyStyle}>Employee Name: <span style={valueStyle}>{employee.name}</span></div>
         <div style={propertyStyle}>Location: <span style={valueStyle}>{employee.location}</span></div>
         <div style={propertyStyle}>Role: <span style={valueStyle}>{employee.role}</span></div>
         <div style={propertyStyle}>Phone Number: <span style={valueStyle}>{employee.phone}</span></div>
         <div>{employee.Salary &&
-        <div style={propertyStyle}>Salary: <span style={valueStyle}>${employee.Salary}</span></div>}</div>
+        <div style={propertyStyle}>Salary: <span style={valueStyle}>${employee?.Salary.toLocaleString("en-US")}</span></div>}</div>
         {hasManager && (<div style={propertyStyle}>Reports to: <span style={valueStyle}>{employeeManager}</span></div>)}
         {haveReports && (<div style={propertyStyle}>Direct Reports: <span style={valueStyle}>{reportsDiv}</span></div>)}
         {hasReports && user.Reports.indexOf(employee.employee_id) >= 0 && (

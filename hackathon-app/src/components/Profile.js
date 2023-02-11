@@ -107,6 +107,8 @@ function Profile(){
             }
         }
     }
+    let formattedSalary = user.Salary.toLocaleString("en-US");
+    console.log(formattedSalary);
     useEffect(()=>{
       getManagers();
       getReports();
@@ -123,7 +125,7 @@ function Profile(){
         <div style={propertyStyle}>Location: <span style={valueStyle}>{user.location}</span></div>
         <div style={propertyStyle}>Role: <span style={valueStyle}>{user.role}</span></div>
         <div style={propertyStyle}>Phone Number: <span style={valueStyle}>{user.phone}</span></div>
-        <div style={propertyStyle}>Salary: <span style={valueStyle}>${user.Salary}</span></div>
+        <div style={propertyStyle}>Salary: <span style={valueStyle}>${formattedSalary}</span></div>
         {hasManager && (<div style={propertyStyle}>Reports to: <span style={valueStyle}>{userManager}</span></div>)}
         {hasReports && (<div style={propertyStyle}>Direct Reports: <span style={valueStyle}>{reportsDiv}</span></div>)}
         </div>
