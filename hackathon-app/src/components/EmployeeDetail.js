@@ -49,6 +49,10 @@ const detailsDiv = {
     textDecoration: 'underline'
   }
 
+  const editSalary = {
+    paddingTop: '7px'
+  }
+
 
 function EmployeeDetail(){
 
@@ -142,11 +146,12 @@ function EmployeeDetail(){
     function handleClick(id) {
         console.log(id)
        navigate(`/employee/${id}`)
+       
       }
 
     useEffect(()=>{
         getEmployee()
-    },[])
+    },[id])
 
     return (
         <>
@@ -161,7 +166,7 @@ function EmployeeDetail(){
         {hasManager && (<div style={propertyStyle}>Reports to: <span style={valueStyle}>{employeeManager}</span></div>)}
        
         {hasReports && user.Reports.indexOf(employee.employee_id) >= 0 && (
-            <div>
+            <div style={editSalary}>
                 <p>Edit this employee's salary: </p>
                 <form onSubmit={handleSubmit}>
                 <TextField size="small" sx={{mr:2}} type="number" name="salary" value={salary} onChange={(e)=>setSalary(e.target.value)}></TextField>
