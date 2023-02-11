@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react'
 import Search from './Search.js'
 import EmployeeDetail from './EmployeeDetail.js'
 import {useNavigate} from 'react-router-dom'
+import './Search.css'
+
 
 
 
@@ -34,6 +36,15 @@ const propertyStyle = {
   marginBottom: '7px'
 }
 
+const reportStyle = {
+  fontStyle: 'italic',
+  fontSize: '12pt',
+  marginBottom: '7px', 
+  paddingTop: '15px',
+  textDecoration: 'underline'
+}
+
+
 const valueStyle = {
   fontStyle: 'normal',
   fontSize: '14pt'
@@ -45,8 +56,10 @@ const valueStyle2 = {
   fontSize: '12pt',
   fontWeight: 'bold',
   marginBottom: '7px', 
-  paddingLeft: '15px'
-}
+  paddingLeft: '15px',
+  '&:hover': {
+    fontSize: '12.5pt'
+}}
 
 
 const flexThat = {
@@ -149,9 +162,9 @@ const navigate = useNavigate()
         <div style={propertyStyle}>Phone Number: <span style={valueStyle}>{user.phone}</span></div>
         <div style={propertyStyle}>Salary: <span style={valueStyle}>${user.Salary}</span></div>
         {hasManager && (<div style={propertyStyle}>Reports To: <span style={valueStyle}>{userManager}</span></div>)}
-        {hasReports && <div style={propertyStyle}>Direct Reports: </div>}
+        {hasReports && <div style={reportStyle}>Direct Reports: </div>}
         {hasReports && reportsArr.map((report)=>
-        <div onClick={(e)=> handleClick(report.employee_id)} style={valueStyle2}>{report.name}</div>)}
+        <div onClick={(e)=> handleClick(report.employee_id)} className="hoverMeReports"  >{report.name}</div>)}
        
     
         </div>

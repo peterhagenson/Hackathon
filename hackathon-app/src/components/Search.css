@@ -7,3 +7,15 @@
  .hoverMe:hover{
     font-size: 12.5pt;
 }
+
+.hoverMeReports {
+    font-style: normal;
+    font-size: 12pt;
+    font-weight: bold;
+    margin-bottom: 7px;
+    padding-left: 15px
+}
+
+.hoverMeReports:hover{
+    font-size: 12.5pt;
+}
