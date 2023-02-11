@@ -138,16 +138,13 @@ const navigate = useNavigate()
             }
         }
     }
-<<<<<<< HEAD
     let formattedSalary = user.Salary.toLocaleString("en-US");
     console.log(formattedSalary);
-=======
 
     function handleClick(id) {
       console.log(id)
       navigate(`/employee/${id}`)
     }
->>>>>>> directReportsMap
     useEffect(()=>{
       getManagers();
       getReports();
@@ -165,11 +162,6 @@ const navigate = useNavigate()
         <div style={propertyStyle}>Location: <span style={valueStyle}>{user.location}</span></div>
         <div style={propertyStyle}>Role: <span style={valueStyle}>{user.role}</span></div>
         <div style={propertyStyle}>Phone Number: <span style={valueStyle}>{user.phone}</span></div>
-<<<<<<< HEAD
-        <div style={propertyStyle}>Salary: <span style={valueStyle}>${formattedSalary}</span></div>
-        {hasManager && (<div style={propertyStyle}>Reports to: <span style={valueStyle}>{userManager}</span></div>)}
-        {hasReports && (<div style={propertyStyle}>Direct Reports: <span style={valueStyle}>{reportsDiv}</span></div>)}
-=======
         <div style={propertyStyle}>Salary: <span style={valueStyle}>${user.Salary}</span></div>
         {hasManager && (<div style={propertyStyle}>Reports To: <span style={valueStyle}>{userManager}</span></div>)}
         {hasReports && <div style={reportStyle}>Direct Reports: </div>}
@@ -177,7 +169,6 @@ const navigate = useNavigate()
         <div onClick={(e)=> handleClick(report.employee_id)} className="hoverMeReports"  >{report.name}</div>)}
        
     
->>>>>>> directReportsMap
         </div>
         <div style={lastProfileElement}></div>
       </div>

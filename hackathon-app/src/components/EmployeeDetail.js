@@ -158,12 +158,10 @@ function EmployeeDetail(){
 
     return (
         <>
-<<<<<<< HEAD
-=======
+
         <div style={{ marginTop: '25px', marginLeft: '25px'}}>
         <Button sx={styles1} onClick={handleBack} type="submit">Back to Search</Button>
         </div>
->>>>>>> directReportsMap
         <div style={detailsDiv}>
         <div style={propertyStyle}>Employee Name: <span style={valueStyle}>{employee.name}</span></div>
         <div style={propertyStyle}>Location: <span style={valueStyle}>{employee.location}</span></div>
