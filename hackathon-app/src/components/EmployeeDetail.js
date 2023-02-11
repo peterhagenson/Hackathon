@@ -10,7 +10,7 @@ const detailsDiv = {
     margin: '0 auto 20px', 
     paddingLeft: '25px',
     paddingRight: '25px',
-    marginTop: '100px'
+    marginTop: '30px'
   }
 
   const propertyStyle = {
@@ -149,13 +149,19 @@ function EmployeeDetail(){
        
       }
 
+      function handleBack(){
+        navigate('/profile')
+      }
+
     useEffect(()=>{
         getEmployee()
     },[id])
 
     return (
         <>
-        
+        <div style={{ marginTop: '25px', marginLeft: '25px'}}>
+        <Button sx={styles1} onClick={handleBack} type="submit">Back to Search</Button>
+        </div>
         <div style={detailsDiv}>
         <div style={propertyStyle}>Employee Name: <span style={valueStyle}>{employee.name}</span></div>
         <div style={propertyStyle}>Location: <span style={valueStyle}>{employee.location}</span></div>
@@ -180,7 +186,6 @@ function EmployeeDetail(){
         <div onClick={(e)=> handleClick(report.employee_id)} className="hoverMeReports"  >{report.name}</div>)}
         
         </div>
-        
         
         
         </>
