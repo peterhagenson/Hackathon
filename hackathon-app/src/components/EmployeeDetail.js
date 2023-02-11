@@ -2,6 +2,8 @@ import {useParams} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import Button from '@mui/material/Button'
 import TextField from'@mui/material/TextField'
+import {useNavigate} from 'react-router-dom'
+
 
 const detailsDiv = {
     width: 'fit-content',
@@ -39,10 +41,18 @@ const detailsDiv = {
     }
   } 
 
+  const reportStyle = {
+    fontStyle: 'italic',
+    fontSize: '12pt',
+    marginBottom: '7px', 
+    paddingTop: '15px',
+    textDecoration: 'underline'
+  }
+
 
 function EmployeeDetail(){
 
-    
+    const navigate = useNavigate();
 
     let id = useParams();
     //console.log(id)
@@ -99,6 +109,7 @@ function EmployeeDetail(){
     let employeeManager;
     let haveReports = false;
     let reportsDiv = "";
+    let reportsArr = []
     let currentEmployee = JSON.parse(localStorage.getItem("current") ||'{}')
     const managers = JSON.parse(localStorage.getItem('managers')||'[]')
     const employees = JSON.parse(localStorage.getItem('employeesList')||'[]')
@@ -116,13 +127,22 @@ function EmployeeDetail(){
         for (let r of currentEmployee.Reports) {
             for (let e of employees) {
                 if (r === e.employee_id) {
-                    console.log(e.name);
+                   // console.log(e.name);
                     reportsDiv += e.name + " ";
+                    reportsArr.push(e)
+                
                     continue;
                 }
+               
             }
         }
+        console.log(reportsArr)
     }
+
+    function handleClick(id) {
+        console.log(id)
+       navigate(`/employee/${id}`)
+      }
 
     useEffect(()=>{
         getEmployee()
@@ -139,7 +159,7 @@ function EmployeeDetail(){
         <div>{employee.Salary &&
         <div style={propertyStyle}>Salary: <span style={valueStyle}>${employee.Salary}</span></div>}</div>
         {hasManager && (<div style={propertyStyle}>Reports to: <span style={valueStyle}>{employeeManager}</span></div>)}
-        {haveReports && (<div style={propertyStyle}>Direct Reports: <span style={valueStyle}>{reportsDiv}</span></div>)}
+       
         {hasReports && user.Reports.indexOf(employee.employee_id) >= 0 && (
             <div>
                 <p>Edit this employee's salary: </p>
@@ -148,7 +168,12 @@ function EmployeeDetail(){
                 <Button sx={styles1} type="submit">Update Salary</Button>
                 </form>
             </div>
+            
         )}
+        {hasReports && reportsArr[0] != null && <div style={reportStyle}>Direct Reports: </div>}
+        {hasReports && reportsArr.map((report)=>
+        <div onClick={(e)=> handleClick(report.employee_id)} className="hoverMeReports"  >{report.name}</div>)}
+        
         </div>
         
         
