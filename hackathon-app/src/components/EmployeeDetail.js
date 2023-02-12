@@ -169,7 +169,7 @@ function EmployeeDetail(){
         <div style={propertyStyle}>Phone Number: <span style={valueStyle}>{employee.phone}</span></div>
         <div>{employee.Salary &&
         <div style={propertyStyle}>Salary: <span style={valueStyle}>${employee?.Salary.toLocaleString("en-US")}</span></div>}</div>
-        <br />
+        {/* <br /> */}
         {hasReports && user.Reports.indexOf(employee.employee_id) >= 0 && (
             <div style={editSalary}>
                 <p>Edit this employee's salary: </p>
@@ -177,7 +177,7 @@ function EmployeeDetail(){
                 <TextField size="small" sx={{mr:2}} type="number" name="salary" value={salary} onChange={(e)=>setSalary(e.target.value)}></TextField>
                 <Button sx={styles1} type="submit">Update Salary</Button>
                 </form>
-                <br />
+                {/* <br /> */}
             </div>
             
         )} 
