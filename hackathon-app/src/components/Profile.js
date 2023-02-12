@@ -115,8 +115,7 @@ const navigate = useNavigate()
     let reportsArr = []
     const managers = JSON.parse(localStorage.getItem('managers')||'[]')
 
-    console.log(localStorage.getItem("managers"))
-    if (user.Manager.length > 0) {
+    if (user.Manager?.length > 0) {
         hasManager = true;
         for (let ma of managers) {
             if (ma.employee_id == user.Manager[0]) {
@@ -125,22 +124,22 @@ const navigate = useNavigate()
         }
     }
     const employees = JSON.parse(localStorage.getItem('employeesList')||'[]')
-    if (user.Reports.length > 0) {
+    if (user.Reports?.length > 0) {
         hasReports = true;
         for (let r of user.Reports) {
             for (let e of employees) {
-                if (r === e.employee_id) {
+                if (r === e?.employee_id) {
                     console.log(e.name);
                     reportsDiv += e.name + " ";
-                    reportsArr.push(e)
+                    reportsArr.push(e);
                     continue;
                 }
             }
         }
+        console.log(user.Reports);
     }
     let formattedSalary = user.Salary.toLocaleString("en-US");
-    console.log(formattedSalary);
-
+    
     function handleClick(id) {
       console.log(id)
       navigate(`/employee/${id}`)
