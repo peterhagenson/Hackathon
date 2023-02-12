@@ -165,7 +165,7 @@ function EmployeeDetail(){
         <div style={detailsDiv}>
         <div style={propertyStyle}>Employee Name: <span style={valueStyle}>{employee.name}</span></div>
         <div style={propertyStyle}>Location: <span style={valueStyle}>{employee.location}</span></div>
-        <div style={propertyStyle}>Role: <span style={valueStyle}>{employee.role}</span></div>
+        <div style={propertyStyle}>rRole: <span style={valueStyle}>{employee.role}</span></div>
         <div style={propertyStyle}>Phone Number: <span style={valueStyle}>{employee.phone}</span></div>
         <div>{employee.Salary &&
         <div style={propertyStyle}>Salary: <span style={valueStyle}>${employee?.Salary.toLocaleString("en-US")}</span></div>}</div>
