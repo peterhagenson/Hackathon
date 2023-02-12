@@ -169,7 +169,7 @@ function EmployeeDetail(){
         <div style={propertyStyle}>Phone Number: <span style={valueStyle}>{employee.phone}</span></div>
         <div>{employee.Salary &&
         <div style={propertyStyle}>Salary: <span style={valueStyle}>${employee?.Salary.toLocaleString("en-US")}</span></div>}</div>
-        {hasManager && (<div style={propertyStyle}>Reports to: <span style={valueStyle}>{employeeManager}</span></div>)}
+        {hasManager && (<div style={propertyStyle}>Reports To: <span style={valueStyle}>{employeeManager}</span></div>)}
        
         {hasReports && user.Reports.indexOf(employee.employee_id) >= 0 && (
             <div style={editSalary}>
