@@ -159,7 +159,7 @@ const navigate = useNavigate()
        <div style={detailsDiv}>
         <div style={propertyStyle}>Employee Name: <span style={valueStyle}>{user.name}</span></div>
         <div style={propertyStyle}>Location: <span style={valueStyle}>{user.location}</span></div>
-        <div style={propertyStyle}>Role <span style={valueStyle}>{user.role}</span></div>
+        <div style={propertyStyle}>Role: <span style={valueStyle}>{user.role}</span></div>
         <div style={propertyStyle}>Phone Number: <span style={valueStyle}>{user.phone}</span></div>
         <div style={propertyStyle}>Salary: <span style={valueStyle}>${user.Salary}</span></div>
         {hasManager && (<div style={propertyStyle}>Reports To: <span style={valueStyle}>{userManager}</span></div>)}
